@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>SOVRANO — A magazine for the considered man</title>
+  <meta name="description" content="An unhurried print magazine for the considered man — culture, style, history and dating, beautifully made and printed to be kept. Reserve Issue 01." />
+  <meta name="theme-color" content="#F4F0E8" />
+
+  <!-- Favicon: a serif "S" set on paper. -->
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="favicon.svg" />
+
+  <!-- Open Graph / social preview. Swap og-image.jpg in once artwork exists. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SOVRANO — A magazine for the considered man" />
+  <meta property="og:description" content="An unhurried print magazine in the older tradition. Culture · Style · History · Dating. Reserve Issue 01." />
+  <meta property="og:url" content="https://sovranomag.com" />
+  <!-- <meta property="og:image" content="https://sovranomag.com/og-image.jpg" /> -->
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="canonical" href="https://sovranomag.com/" />
+
+  <!-- Fonts: Playfair Display (display serif), EB Garamond (body), Inter (small caps / labels).
+       Loaded via Google Fonts <link> — no paid CDN. Preconnect for performance. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Skip link for keyboard / screen-reader users. -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============================================================= -->
+  <!-- HEADER / NAV — centered wordmark, thin top rule, Subscribe link -->
+  <!-- Transparent over the hero; gains a subtle background once scrolled (see script.js). -->
+  <!-- ============================================================= -->
+  <header class="site-header" id="site-header" data-header>
+    <div class="site-header__inner">
+      <span class="site-header__spacer" aria-hidden="true"></span>
+      <a class="site-header__mark" href="#top">SOVRANO</a>
+      <nav class="site-header__nav" aria-label="Primary">
+        <a class="site-header__link" href="#subscribe">Subscribe</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ========================================================= -->
+    <!-- HERO — full-viewport, cream, type-only and complete as is. -->
+    <!-- ========================================================= -->
+    <section class="hero" id="top">
+      <div class="hero__inner">
+
+        <!-- HERO PHOTOGRAPH PLACEHOLDER
+             Drop the cover or a lead Muse image here when ready. Recommended:
+             a tall, desaturated, cinematic portrait. The hero is intentionally
+             type-only until then. To use: remove the `hidden` attribute, set the
+             <img> src/alt below, and the stylesheet will frame it. -->
+        <figure class="hero__media" hidden>
+          <img src="" alt="" width="1200" height="1500" loading="eager" decoding="async" />
+        </figure>
+
+        <h1 class="hero__wordmark">SOVRANO</h1>
+
+        <p class="kicker kicker--rules">A magazine for the considered man</p>
+
+        <p class="hero__pillars">Culture · Style · History · Dating</p>
+
+        <p class="hero__intent">
+          An unhurried magazine in the older tradition — beautifully made,
+          confident enough to be quiet — for a curious man living now.
+        </p>
+
+        <p class="hero__cta">
+          <a class="button" href="#subscribe">Reserve Issue 01</a>
+        </p>
+      </div>
+
+      <a class="hero__scroll" href="#idea" aria-label="Read on">
+        <span aria-hidden="true">&#8595;</span>
+      </a>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- THE IDEA — short manifesto with a pull-quote.              -->
+    <!-- ========================================================= -->
+    <section class="section idea" id="idea" aria-labelledby="idea-heading">
+      <div class="container container--narrow">
+        <p class="kicker kicker--accent">The Idea</p>
+        <h2 class="section__heading" id="idea-heading">A different register</h2>
+
+        <div class="prose">
+          <p>
+            Most magazines for men either shout or sneer. Sovrano does neither.
+            It treats culture, style, history and dating with equal seriousness
+            and equal pleasure — and assumes you are old enough to want both.
+          </p>
+
+          <blockquote class="pullquote">
+            <p>We assume the reader is curious. Everything else follows from that.</p>
+          </blockquote>
+
+          <p>
+            It is printed to be kept, not scrolled — an object that earns its
+            place on a shelf and improves the room it sits in. Quarterly, on good
+            paper, edited slowly and read at leisure.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- THE FOUR PILLARS — Culture, Style, History, Dating.       -->
+    <!-- Hairline rules between columns; no boxed cards.            -->
+    <!-- ========================================================= -->
+    <section class="section pillars" aria-labelledby="pillars-heading">
+      <div class="container">
+        <p class="kicker kicker--accent">The Four Pillars</p>
+        <h2 class="section__heading section__heading--center" id="pillars-heading">Four subjects, taken seriously</h2>
+
+        <ul class="pillars__grid">
+          <li class="pillar">
+            <span class="pillar__numeral" aria-hidden="true">I</span>
+            <h3 class="pillar__name">Culture</h3>
+            <p class="pillar__desc">Film, food, music and ideas — understood deeply rather than reported breathlessly.</p>
+          </li>
+          <li class="pillar">
+            <span class="pillar__numeral" aria-hidden="true">II</span>
+            <h3 class="pillar__name">Style</h3>
+            <p class="pillar__desc">Style, not fashion. The principles behind the choices, useful for a decade.</p>
+          </li>
+          <li class="pillar">
+            <span class="pillar__numeral" aria-hidden="true">III</span>
+            <h3 class="pillar__name">History</h3>
+            <p class="pillar__desc">Narrative non-fiction that reads like a thriller and teaches like a seminar.</p>
+          </li>
+          <li class="pillar">
+            <span class="pillar__numeral" aria-hidden="true">IV</span>
+            <h3 class="pillar__name">Dating</h3>
+            <p class="pillar__desc">Honest, adult writing about desire and courtship — and taking women seriously as people.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- THE MUSE — the differentiator. Gallery-like, on ink.      -->
+    <!-- ========================================================= -->
+    <section class="section muse" aria-labelledby="muse-heading">
+      <div class="container container--wide muse__inner">
+
+        <div class="muse__text">
+          <p class="kicker kicker--accent-light">The Muse</p>
+          <h2 class="section__heading section__heading--light" id="muse-heading">One woman, one story</h2>
+          <div class="prose prose--light">
+            <p>
+              Each issue is built around a single woman, cast as the lead of a
+              cinematic story set in that issue's theme. The photography is
+              provocative through narrative and suggestion — never nudity, and
+              always with her agency at its centre.
+            </p>
+            <p>
+              It is the difference between a portrait and a poster: a woman who
+              is the author of the scene, not its decoration.
+            </p>
+          </div>
+        </div>
+
+        <!-- MUSE PORTFOLIO IMAGE PLACEHOLDER
+             Drop the lead Muse photograph here. Recommended: a 4:5 portrait,
+             cinematic and restrained. To use: remove `hidden` from the <figure>,
+             set the <img> src/alt, and the caption credit below will sit beneath it. -->
+        <figure class="muse__figure">
+          <div class="muse__frame" hidden>
+            <img src="" alt="" width="1000" height="1250" loading="lazy" decoding="async" />
+          </div>
+          <div class="muse__placeholder" aria-hidden="true">
+            <span>Portrait forthcoming</span>
+          </div>
+          <figcaption class="muse__caption">The Muse · Issue 01</figcaption>
+        </figure>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- ISSUE 01 TEASER — Rome, 1962.                             -->
+    <!-- ========================================================= -->
+    <section class="section issue" aria-labelledby="issue-heading">
+      <div class="container container--narrow issue__inner">
+        <p class="kicker kicker--accent">First Issue</p>
+        <h2 class="section__heading" id="issue-heading">Issue 01 — Rome, 1962</h2>
+        <p class="prose issue__lede">
+          Postwar Rome, mid-stride: the dolce vita at its glittering height, a
+          city reinventing itself in good tailoring and better company. A story
+          about appetite, ambition and the art of arriving — told the way it
+          deserves to be.
+        </p>
+        <p class="issue__format">
+          <span class="kicker kicker--accent">Quarterly · Printed to be kept</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SIGNUP / RESERVE — the conversion section.                -->
+    <!-- Works on a static host: POSTs to a form service.          -->
+    <!-- ========================================================= -->
+    <section class="section subscribe" id="subscribe" aria-labelledby="subscribe-heading">
+      <div class="container container--narrow subscribe__inner">
+        <p class="kicker kicker--accent">Reserve</p>
+        <h2 class="section__heading section__heading--center" id="subscribe-heading">Be there for Issue 01</h2>
+        <p class="prose subscribe__lede">
+          Leave your address and we will write once — when the first issue is
+          ready to reserve. No more often than that.
+        </p>
+
+        <!-- FORM ENDPOINT PLACEHOLDER
+             Replace action="[FORM_ENDPOINT]" with your Formspree / Buttondown /
+             Mailchimp POST URL. The form works without JavaScript (a normal POST);
+             script.js progressively enhances it with inline success/error states. -->
+        <form class="signup" action="[FORM_ENDPOINT]" method="POST" data-signup novalidate>
+          <label class="signup__label" for="email">Email address</label>
+
+          <div class="signup__row">
+            <input
+              class="signup__input"
+              type="email"
+              id="email"
+              name="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            />
+            <button class="button" type="submit">Reserve my copy</button>
+          </div>
+
+          <!-- Honeypot anti-spam field: hidden from people, tempting to bots.
+               Leave it empty; submissions that fill it are ignored. -->
+          <div class="signup__honeypot" aria-hidden="true">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <!-- Inline status, announced politely to assistive tech. -->
+          <p class="signup__status" data-signup-status role="status" aria-live="polite"></p>
+
+          <p class="signup__privacy">No spam. One email when we launch.</p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER — quiet. Wordmark, tagline, copyright, socials.    -->
+  <!-- ========================================================= -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <a class="site-footer__mark" href="#top">SOVRANO</a>
+      <p class="site-footer__tagline">A magazine for the considered man.</p>
+
+      <nav class="site-footer__social" aria-label="Social">
+        <!-- Replace href="#" with the real profile URLs when live. -->
+        <a class="site-footer__icon" href="#" aria-label="Sovrano on Instagram" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="5" />
+            <circle cx="12" cy="12" r="4" />
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+          </svg>
+        </a>
+        <a class="site-footer__icon" href="#" aria-label="Sovrano on X" rel="noopener">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M17.53 3H20.5l-6.48 7.4L21.75 21h-6.0l-4.7-6.14L5.6 21H2.63l6.93-7.92L2.25 3h6.16l4.25 5.62L17.53 3Zm-1.05 16.2h1.64L7.6 4.7H5.84l10.64 14.5Z" />
+          </svg>
+        </a>
+      </nav>
+
+      <p class="site-footer__legal">&copy; 2026 Sovrano. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

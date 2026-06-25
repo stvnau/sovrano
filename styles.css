@@ -1,0 +1,589 @@
+/* ============================================================
+   SOVRANO — styles.css
+   A near-monochrome editorial landing page. Restraint over features:
+   thin gold/oxblood hairlines, generous space, no shadows, no rounded
+   cards, no gradients.
+   ============================================================ */
+
+/* ---- Design tokens --------------------------------------- */
+:root {
+  /* Palette */
+  --ink:        #1A1A1A;   /* text, masthead             */
+  --oxblood:    #6E1423;   /* kickers, rules, accents    */
+  --gold:       #9A7B4F;   /* hairline rules, flourishes */
+  --gold-light: #C2A36A;   /* gold used as TEXT on the dark ground (AA contrast) */
+  --cream:      #F4F0E8;   /* paper / page background    */
+  --white:      #FFFFFF;
+
+  /* Tints used sparingly for rules / muted text on dark grounds */
+  --ink-muted:   #595550;
+  --cream-muted: rgba(244, 240, 232, 0.72);
+  --gold-soft:   rgba(154, 123, 79, 0.45);
+  --line:        rgba(26, 26, 26, 0.14);
+
+  /* Type */
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body:    "EB Garamond", Georgia, "Times New Roman", serif;
+  --font-sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Spacing / layout */
+  --measure: 38rem;          /* comfortable reading width */
+  --space-section: clamp(4.5rem, 11vw, 9rem);
+  --header-h: 4.25rem;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* ---- Reset / base ---------------------------------------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Account for the sticky header when jumping to anchors. */
+  scroll-padding-top: var(--header-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: clamp(1.075rem, 0.95rem + 0.5vw, 1.25rem);
+  line-height: 1.72;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.08; }
+
+p { margin: 0; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--oxblood);
+  outline-offset: 3px;
+}
+
+/* ---- Skip link ------------------------------------------- */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0.5rem;
+  transform: translate(-50%, -150%);
+  background: var(--ink);
+  color: var(--cream);
+  padding: 0.6rem 1.1rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  z-index: 1000;
+  transition: transform 0.2s var(--ease);
+}
+.skip-link:focus { transform: translate(-50%, 0); }
+
+/* ---- Layout helpers -------------------------------------- */
+.container {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.5rem, 6vw, 4rem);
+}
+.container--narrow { max-width: calc(var(--measure) + 8vw); }
+.container--wide   { max-width: 78rem; }
+
+.section { padding-block: var(--space-section); }
+
+.section__heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3rem);
+  letter-spacing: -0.01em;
+  margin-top: 0.6rem;
+}
+.section__heading--center { text-align: center; }
+.section__heading--light { color: var(--cream); }
+
+/* ---- Kickers (Inter, small caps) ------------------------- */
+.kicker {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  margin: 0;
+}
+.kicker--accent       { color: var(--oxblood); }
+.kicker--accent-light { color: var(--gold-light); }
+
+/* Kicker framed by two gold hairline rules (used in the hero). */
+.kicker--rules {
+  color: var(--oxblood);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.9rem, 3vw, 1.6rem);
+  text-align: center;
+}
+.kicker--rules::before,
+.kicker--rules::after {
+  content: "";
+  height: 1px;
+  width: clamp(1.5rem, 9vw, 4.5rem);
+  background: var(--gold);
+  flex: 0 0 auto;
+}
+
+/* ---- Prose ----------------------------------------------- */
+.prose > p + p { margin-top: 1.4em; }
+.prose { max-width: var(--measure); }
+.prose--light { color: var(--cream-muted); }
+
+/* ============================================================
+   HEADER / NAV
+   ============================================================ */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  border-top: 2px solid var(--ink);     /* the thin top rule */
+  background: transparent;
+  transition: background-color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+/* Subtle paper background + hairline once the page is scrolled. */
+.site-header.is-scrolled {
+  background: rgba(244, 240, 232, 0.92);
+  border-bottom: 1px solid var(--line);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+.site-header__inner {
+  max-width: 78rem;
+  margin-inline: auto;
+  height: var(--header-h);
+  padding-inline: clamp(1.25rem, 5vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+.site-header__spacer { display: block; }
+.site-header__mark {
+  grid-column: 2;
+  justify-self: center;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;          /* optical centering for tracked caps */
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.site-header__nav { grid-column: 3; justify-self: end; }
+.site-header__link {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  color: var(--ink);
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.site-header__link:hover { color: var(--oxblood); border-bottom-color: var(--oxblood); }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: calc(var(--header-h) + 2rem) clamp(1.5rem, 6vw, 4rem) 4rem;
+  position: relative;
+  background: var(--cream);
+}
+.hero__inner {
+  max-width: 46rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Optional hero photograph, framed when revealed. */
+.hero__media {
+  margin: 0 0 2.5rem;
+  max-width: 22rem;
+  border: 1px solid var(--gold-soft);
+  padding: 0.5rem;
+}
+
+.hero__wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(3.25rem, 1.5rem + 11vw, 9rem);
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;          /* compensate trailing letter-spacing */
+  line-height: 0.95;
+  margin: 0;
+}
+
+.kicker--rules { margin-top: 1.8rem; }
+
+.hero__pillars {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(1.1rem, 0.95rem + 0.8vw, 1.5rem);
+  color: var(--ink);
+  margin-top: 1.6rem;
+  letter-spacing: 0.01em;
+}
+
+.hero__intent {
+  max-width: 34rem;
+  margin-top: 1.6rem;
+  color: var(--ink-muted);
+  font-size: clamp(1.05rem, 0.95rem + 0.4vw, 1.2rem);
+}
+
+.hero__cta { margin-top: 2.4rem; }
+
+/* Quiet scroll affordance at the foot of the hero. */
+.hero__scroll {
+  position: absolute;
+  bottom: 1.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  text-decoration: none;
+  font-size: 1.1rem;
+  animation: nudge 2.4s var(--ease) infinite;
+}
+@keyframes nudge {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 5px); }
+}
+
+/* ---- Button ---------------------------------------------- */
+.button {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  color: var(--cream);
+  background: var(--ink);
+  padding: 0.95rem 1.9rem;
+  border: 1px solid var(--ink);
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
+}
+.button:hover,
+.button:focus-visible {
+  background: var(--oxblood);
+  border-color: var(--oxblood);
+  color: var(--white);
+}
+
+/* ============================================================
+   THE IDEA
+   ============================================================ */
+.idea {
+  border-top: 1px solid var(--gold-soft);
+  text-align: center;
+}
+.idea .prose { margin-inline: auto; margin-top: 1.8rem; text-align: left; }
+
+.pullquote {
+  margin: 2.6rem 0;
+  padding: 0;
+  text-align: center;
+}
+.pullquote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.1rem + 1.9vw, 2.35rem);
+  line-height: 1.32;
+  color: var(--ink);
+  position: relative;
+  padding-top: 2rem;
+}
+/* Single gold hairline above the pull-quote. */
+.pullquote p::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 3.5rem;
+  height: 1px;
+  background: var(--gold);
+}
+
+/* ============================================================
+   THE FOUR PILLARS
+   ============================================================ */
+.pillars { background: var(--white); }
+.pillars .kicker--accent { text-align: center; }
+
+.pillars__grid {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+}
+.pillar {
+  padding: 2.4rem 1.6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+/* Hairline dividers between columns rather than boxed cards. */
+.pillar + .pillar { border-left: 1px solid var(--line); }
+
+.pillar__numeral {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--gold);
+  margin-bottom: 0.7rem;
+}
+.pillar__name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.4rem, 1.1rem + 1vw, 1.85rem);
+  margin-bottom: 0.7rem;
+}
+.pillar__desc {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 18rem;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   THE MUSE — gallery-like, on ink.
+   ============================================================ */
+.muse { background: var(--ink); color: var(--cream); }
+.muse__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+.muse__text { max-width: 30rem; }
+.muse__text .section__heading { margin-bottom: 1.6rem; }
+
+.muse__figure { margin: 0; }
+.muse__frame {
+  border: 1px solid var(--gold-soft);
+  padding: 0.5rem;
+}
+/* Placeholder shown until a real portrait is dropped in. */
+.muse__placeholder {
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--gold-soft);
+  display: grid;
+  place-items: center;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 14px,
+      rgba(154, 123, 79, 0.06) 14px,
+      rgba(154, 123, 79, 0.06) 15px
+    );
+}
+.muse__placeholder span {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--gold-light);
+}
+.muse__caption {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--gold-light);
+  margin-top: 1rem;
+  text-align: right;
+}
+
+/* ============================================================
+   ISSUE 01 TEASER
+   ============================================================ */
+.issue { text-align: center; background: var(--cream); }
+.issue__inner { display: flex; flex-direction: column; align-items: center; }
+.issue__lede { margin-top: 1.6rem; max-width: 34rem; }
+.issue__format { margin-top: 2.2rem; }
+
+/* ============================================================
+   SIGNUP / RESERVE
+   ============================================================ */
+.subscribe { background: var(--white); border-top: 1px solid var(--gold-soft); }
+.subscribe__inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.subscribe__lede { margin-top: 1.4rem; max-width: 32rem; }
+
+.signup {
+  width: 100%;
+  max-width: 32rem;
+  margin-top: 2.6rem;
+  text-align: left;
+}
+.signup__label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--ink-muted);
+  margin-bottom: 0.6rem;
+}
+.signup__row {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+.signup__input {
+  flex: 1 1 14rem;
+  min-width: 0;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: var(--cream);
+  border: 1px solid var(--line);
+  padding: 0.85rem 1rem;
+}
+.signup__input::placeholder { color: rgba(26, 26, 26, 0.4); }
+.signup__input:focus-visible { outline: 2px solid var(--oxblood); outline-offset: 0; border-color: var(--oxblood); }
+.signup__row .button { flex: 0 0 auto; }
+
+/* Honeypot: visually and programmatically hidden, still in the DOM for bots. */
+.signup__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.signup__status {
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+  margin-top: 0.9rem;
+  min-height: 1.2em;          /* reserve space to avoid layout shift */
+}
+.signup__status.is-success { color: var(--oxblood); }
+.signup__status.is-error   { color: var(--oxblood); }
+
+.signup__privacy {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  margin-top: 0.9rem;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--ink);
+  color: var(--cream);
+  padding-block: clamp(3rem, 7vw, 4.5rem);
+  text-align: center;
+}
+.site-footer__inner { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.site-footer__mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.24em;
+  text-indent: 0.24em;
+  color: var(--cream);
+  text-decoration: none;
+}
+.site-footer__tagline {
+  font-family: var(--font-body);
+  font-style: italic;
+  color: var(--cream-muted);
+}
+.site-footer__social { display: flex; gap: 1.2rem; margin-top: 0.4rem; }
+.site-footer__icon {
+  color: var(--cream-muted);
+  transition: color 0.25s var(--ease);
+  display: inline-flex;
+}
+.site-footer__icon:hover { color: var(--gold); }
+.site-footer__legal {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--cream-muted);
+  margin-top: 0.6rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 860px) {
+  .muse__inner { grid-template-columns: 1fr; }
+  .muse__text { max-width: none; }
+  .muse__figure { max-width: 26rem; margin-inline: auto; width: 100%; }
+
+  .pillars__grid { grid-template-columns: repeat(2, 1fr); }
+  /* Keep vertical hairlines only between the two columns per row. */
+  .pillar:nth-child(odd) { border-left: none; }
+}
+
+@media (max-width: 540px) {
+  .pillars__grid { grid-template-columns: 1fr; }
+  .pillar { border-left: none !important; padding-inline: 0.5rem; }
+
+  .site-header__link { font-size: 0.66rem; letter-spacing: 0.14em; }
+  .site-header__mark { font-size: 1.05rem; }
+
+  .signup__row { flex-direction: column; align-items: stretch; }
+  .signup__row .button { width: 100%; text-align: center; }
+}
+
+/* ============================================================
+   MOTION PREFERENCES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

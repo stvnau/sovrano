@@ -1,0 +1,6 @@
+# OS / editor cruft — nothing here needs to ship to GitHub Pages.
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
